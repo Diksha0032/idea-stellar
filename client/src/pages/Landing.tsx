@@ -5,12 +5,101 @@ import { TrackCard } from "@/components/TrackCard";
 import { useTracks } from "@/hooks/use-tracks";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Trophy, Calendar, Users, Cpu, ArrowRight } from "lucide-react";
+import { Trophy, Calendar, Users, Cpu, ArrowRight, Lightbulb, Code, Presentation, Award, Rocket, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
+
+function CountdownTimer() {
+  const targetDate = new Date("2025-10-25T00:00:00").getTime();
+  
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  const timeUnits = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
+  ];
+
+  return (
+    <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+      {timeUnits.map((unit, i) => (
+        <motion.div
+          key={unit.label}
+          initial={{ opacity: 0, y: 20, rotateX: -30 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{ delay: 0.8 + i * 0.1, duration: 0.6 }}
+          className="perspective-container"
+        >
+          <div className="timer-digit rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] text-center animate-glow-pulse">
+            <div className="font-orbitron text-3xl md:text-5xl font-bold text-gradient-gold mb-1">
+              {String(unit.value).padStart(2, '0')}
+            </div>
+            <div className="text-white/50 text-xs uppercase tracking-widest">{unit.label}</div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 export default function Landing() {
   const { data: tracks } = useTracks();
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+
+  const steps = [
+    {
+      number: "01",
+      icon: Lightbulb,
+      title: "Ideation",
+      description: "Form teams, brainstorm innovative ideas, and define your project scope. Get inspired by mentors and industry experts.",
+      duration: "Day 1 - 6 Hours"
+    },
+    {
+      number: "02",
+      icon: Code,
+      title: "Development",
+      description: "Build your prototype using cutting-edge technologies. Access exclusive APIs and get hands-on support from sponsors.",
+      duration: "Day 1-2 - 30 Hours"
+    },
+    {
+      number: "03",
+      icon: Presentation,
+      title: "Pitch & Demo",
+      description: "Present your solution to a panel of industry-leading judges. Showcase your innovation and technical prowess.",
+      duration: "Day 3 - 6 Hours"
+    },
+    {
+      number: "04",
+      icon: Award,
+      title: "Awards & Celebration",
+      description: "Winners announced! Network with sponsors, receive prizes, and celebrate your achievements with the community.",
+      duration: "Day 3 - 6 Hours"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/30">
@@ -29,6 +118,37 @@ export default function Landing() {
           <div className="absolute w-[400px] h-[400px] rounded-full border border-primary/30 animate-[pulse_4s_ease-in-out_infinite]" />
         </motion.div>
 
+        {/* 3D Floating Shapes */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div 
+            animate={{ 
+              y: [0, -30, 0],
+              rotateZ: [0, 10, 0],
+              rotateX: [0, 15, 0]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/4 left-[10%] w-20 h-20 border-2 border-primary/30 rotate-45"
+            style={{ transformStyle: 'preserve-3d' }}
+          />
+          <motion.div 
+            animate={{ 
+              y: [0, 40, 0],
+              rotateZ: [45, 60, 45]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/3 right-[15%] w-16 h-16 border-2 border-primary/20 rounded-full"
+          />
+          <motion.div 
+            animate={{ 
+              y: [0, -25, 0],
+              rotateY: [0, 180, 360]
+            }}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-1/3 left-[20%] w-12 h-12 bg-gradient-to-br from-primary/20 to-transparent"
+            style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+          />
+        </div>
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -46,7 +166,7 @@ export default function Landing() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-none tracking-tight mb-8"
           >
-            <span className="block text-white">BUILD THE</span>
+            <span className="block text-white text-3d">BUILD THE</span>
             <span className="block text-gradient-gold drop-shadow-[0_0_30px_rgba(255,215,0,0.2)]">
               FUTURE
             </span>
@@ -62,10 +182,23 @@ export default function Landing() {
             $100,000 in prizes awaiting the visionaries.
           </motion.p>
 
+          {/* Countdown Timer */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-12"
+          >
+            <p className="text-white/40 text-sm uppercase tracking-widest mb-6 flex items-center justify-center gap-2">
+              <Clock className="w-4 h-4" /> Event Starts In
+            </p>
+            <CountdownTimer />
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
             <a href="/api/login">
@@ -99,13 +232,177 @@ export default function Landing() {
             { label: "Countries", value: "45+" },
             { label: "Sponsors", value: "20+" },
           ].map((stat, i) => (
-            <div key={i} className="text-center">
+            <motion.div 
+              key={i} 
+              className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
               <div className="text-3xl md:text-4xl font-display font-bold text-white mb-2">{stat.value}</div>
               <div className="text-primary text-xs tracking-widest uppercase">{stat.label}</div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      {/* About Ideathon Section */}
+      <Section id="about-ideathon" className="relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
+        
+        <div className="relative z-10">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">What Is</span>
+              <h2 className="text-4xl md:text-6xl font-cinzel font-bold text-white mt-4 mb-6">
+                HACK<span className="text-gradient-gold">GOLD</span> IDEATHON
+              </h2>
+              <div className="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-8" />
+            </motion.div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <p className="text-white/70 text-lg leading-relaxed mb-6">
+                HackGold Ideathon is a premier 48-hour innovation marathon that brings together the brightest minds from around the globe. 
+                It's not just a hackathon — it's a launchpad for revolutionary ideas that will shape the future of technology.
+              </p>
+              <p className="text-white/70 text-lg leading-relaxed mb-6">
+                Whether you're a seasoned developer, a creative designer, or an ambitious entrepreneur, HackGold provides the perfect 
+                environment to collaborate, innovate, and transform your vision into reality.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                {[
+                  { icon: Rocket, label: "48 Hours of Innovation" },
+                  { icon: Users, label: "Global Community" },
+                  { icon: Trophy, label: "$100k+ in Prizes" },
+                  { icon: Cpu, label: "Cutting-Edge Tech" }
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 tilt-hover"
+                  >
+                    <item.icon className="w-6 h-6 text-primary" />
+                    <span className="text-white/80 text-sm font-medium">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative perspective-container"
+            >
+              <div className="card-3d">
+                <div className="card-3d-inner aspect-video rounded-3xl overflow-hidden relative border border-primary/20 glass-gold">
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2940&auto=format&fit=crop')] bg-cover bg-center opacity-60" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  <div className="absolute inset-0 shimmer-gold" />
+                  <div className="absolute bottom-8 left-8 right-8">
+                    <div className="text-5xl font-orbitron font-bold text-gradient-gold mb-2">48:00:00</div>
+                    <div className="text-white/60 text-sm tracking-widest uppercase">Hours of Pure Innovation</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating decorative elements */}
+              <motion.div 
+                animate={{ y: [0, -20, 0], rotateZ: [0, 5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full blur-[60px] opacity-30" 
+              />
+              <motion.div 
+                animate={{ y: [0, 15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-5 -left-5 w-24 h-24 border-2 border-primary/30 rounded-full" 
+              />
+            </motion.div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Steps / Timeline Section */}
+      <Section id="steps" className="bg-black/50">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">Your Journey</span>
+            <h2 className="text-4xl md:text-6xl font-cinzel font-bold text-white mt-4 mb-6">
+              THE <span className="text-gradient-gold">IDEATHON</span> STEPS
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto" />
+          </motion.div>
+        </div>
+
+        <div className="relative">
+          {/* Connecting Line */}
+          <div className="absolute top-0 bottom-0 left-1/2 w-[2px] bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 hidden lg:block" />
+
+          <div className="space-y-8 lg:space-y-0">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2, duration: 0.6 }}
+                className={`relative lg:grid lg:grid-cols-2 lg:gap-8 items-center ${i % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
+              >
+                {/* Timeline Node */}
+                <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-black border-2 border-primary items-center justify-center z-10 animate-glow-pulse">
+                  <span className="font-orbitron font-bold text-primary text-lg">{step.number}</span>
+                </div>
+
+                {/* Card */}
+                <div className={`${i % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:col-start-2 lg:pl-16'}`}>
+                  <div className="step-card glass-panel rounded-2xl p-8 relative overflow-hidden group">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+                    
+                    <div className={`flex items-start gap-6 ${i % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
+                      <div className="shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-black border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                        <step.icon className="w-8 h-8 text-primary" />
+                      </div>
+                      
+                      <div className={`flex-1 ${i % 2 === 0 ? 'lg:text-right' : ''}`}>
+                        <div className="lg:hidden font-orbitron text-primary/60 text-sm mb-2">{step.number}</div>
+                        <h3 className="text-2xl font-cinzel font-bold text-white mb-3">{step.title}</h3>
+                        <p className="text-white/60 leading-relaxed mb-4">{step.description}</p>
+                        <div className="inline-flex items-center gap-2 text-primary text-sm font-medium">
+                          <Calendar className="w-4 h-4" />
+                          {step.duration}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Spacer for opposite side */}
+                <div className={`hidden lg:block ${i % 2 === 0 ? '' : 'lg:col-start-1 lg:row-start-1'}`} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
 
       {/* Tracks Section */}
       <Section id="tracks">
@@ -118,7 +415,6 @@ export default function Landing() {
           {tracks?.map((track, i) => (
             <TrackCard key={track.id} track={track} index={i} />
           )) || (
-            // Loading skeletons
             Array(3).fill(0).map((_, i) => (
               <div key={i} className="h-80 bg-white/5 rounded-2xl animate-pulse border border-white/5" />
             ))
@@ -130,9 +426,9 @@ export default function Landing() {
       <Section id="about" className="bg-gradient-to-b from-transparent to-black">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-8 leading-tight">
-              An Experience Unlike <br />
-              <span className="text-primary italic">Any Other</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+              <span className="font-body">An Experience</span> <br />
+              <span className="font-cinzel text-gradient-gold italic text-3d">Unlike Any Other</span>
             </h2>
             <div className="space-y-8">
               {[
@@ -146,9 +442,9 @@ export default function Landing() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.2 }}
-                  className="flex gap-6"
+                  className="flex gap-6 tilt-hover p-4 rounded-xl hover:bg-white/5 transition-colors"
                 >
-                  <div className="shrink-0 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-black border border-primary/30 flex items-center justify-center text-primary">
                     <feature.icon size={24} />
                   </div>
                   <div>
@@ -159,16 +455,17 @@ export default function Landing() {
               ))}
             </div>
           </div>
-          <div className="relative">
+          <div className="relative perspective-container">
              {/* Decorative Image Placeholder - 3D Cube */}
-             <div className="aspect-square rounded-3xl overflow-hidden relative border border-white/10 glass-panel">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635322966219-b75ed372eb01?q=80&w=2864&auto=format&fit=crop')] bg-cover bg-center opacity-50 mix-blend-overlay" />
-                {/* HTML Comment for Image: Abstract gold and black geometric shapes */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="text-5xl font-display font-bold text-white mb-2">48h</div>
-                  <div className="text-primary text-sm tracking-widest uppercase">Of Non-Stop Innovation</div>
-                </div>
+             <div className="card-3d">
+               <div className="card-3d-inner aspect-square rounded-3xl overflow-hidden relative border border-white/10 glass-panel">
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635322966219-b75ed372eb01?q=80&w=2864&auto=format&fit=crop')] bg-cover bg-center opacity-50 mix-blend-overlay" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                  <div className="absolute bottom-8 left-8 right-8">
+                    <div className="text-5xl font-orbitron font-bold text-gradient-gold mb-2">48h</div>
+                    <div className="text-primary text-sm tracking-widest uppercase">Of Non-Stop Innovation</div>
+                  </div>
+               </div>
              </div>
              
              {/* Floating decorative elements */}
@@ -190,53 +487,58 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-end max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 items-end max-w-5xl mx-auto perspective-container">
           {/* 2nd Place */}
           <motion.div 
-            whileHover={{ y: -10 }}
-            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group"
+            whileHover={{ y: -10, rotateY: 5 }}
+            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group tilt-hover"
           >
+            <div className="absolute top-0 left-0 right-0 h-[2px] shimmer-gold" />
             <div className="text-4xl font-bold text-white/20 mb-4 group-hover:text-primary/20 transition-colors">02</div>
             <div className="text-2xl font-bold text-white mb-2">Runner Up</div>
-            <div className="text-3xl font-display font-bold text-primary mb-6">$25,000</div>
+            <div className="text-3xl font-orbitron font-bold text-primary mb-6">$25,000</div>
             <ul className="text-sm text-white/60 space-y-2">
-              <li>• MacBook Pro M3</li>
-              <li>• YC Interview Fast-track</li>
-              <li>• 1 Year Replit Core</li>
+              <li>MacBook Pro M3</li>
+              <li>YC Interview Fast-track</li>
+              <li>1 Year Replit Core</li>
             </ul>
           </motion.div>
 
           {/* 1st Place */}
           <motion.div 
-            whileHover={{ y: -10 }}
+            whileHover={{ y: -10, scale: 1.02 }}
             className="bg-gradient-to-b from-[#FFD700]/10 to-black border border-[#FFD700]/30 rounded-2xl p-10 text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,215,0,0.1)] order-first md:order-none z-10 transform md:-translate-y-8"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full flex items-center justify-center mb-6 shadow-lg shadow-primary/20">
-              <Trophy className="text-black w-8 h-8" />
+            <div className="absolute inset-0 shimmer-gold opacity-30" />
+            <div className="relative z-10">
+              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full flex items-center justify-center mb-6 shadow-lg shadow-primary/20 animate-glow-pulse">
+                <Trophy className="text-black w-8 h-8" />
+              </div>
+              <div className="text-3xl font-bold text-white mb-2">Grand Prize</div>
+              <div className="text-5xl font-orbitron font-bold text-gradient-gold mb-8">$50,000</div>
+              <ul className="text-sm text-white/80 space-y-3 font-medium">
+                <li>$50k Cash Prize</li>
+                <li>Direct VC Introduction</li>
+                <li>Lifetime Replit Core</li>
+                <li>Featured in TechCrunch</li>
+              </ul>
             </div>
-            <div className="text-3xl font-bold text-white mb-2">Grand Prize</div>
-            <div className="text-5xl font-display font-bold text-gradient-gold mb-8">$50,000</div>
-            <ul className="text-sm text-white/80 space-y-3 font-medium">
-              <li>• $50k Cash Prize</li>
-              <li>• Direct VC Introduction</li>
-              <li>• Lifetime Replit Core</li>
-              <li>• Featured in TechCrunch</li>
-            </ul>
           </motion.div>
 
           {/* 3rd Place */}
           <motion.div 
-            whileHover={{ y: -10 }}
-            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group"
+            whileHover={{ y: -10, rotateY: -5 }}
+            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group tilt-hover"
           >
+            <div className="absolute top-0 left-0 right-0 h-[2px] shimmer-gold" />
             <div className="text-4xl font-bold text-white/20 mb-4 group-hover:text-primary/20 transition-colors">03</div>
             <div className="text-2xl font-bold text-white mb-2">Third Place</div>
-            <div className="text-3xl font-display font-bold text-primary mb-6">$10,000</div>
+            <div className="text-3xl font-orbitron font-bold text-primary mb-6">$10,000</div>
             <ul className="text-sm text-white/60 space-y-2">
-              <li>• iPad Pro</li>
-              <li>• Cloud Credits</li>
-              <li>• Swag Pack</li>
+              <li>iPad Pro</li>
+              <li>Cloud Credits</li>
+              <li>Swag Pack</li>
             </ul>
           </motion.div>
         </div>
@@ -246,7 +548,7 @@ export default function Landing() {
       <footer className="py-12 border-t border-white/5 bg-black text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center gap-2 mb-8 opacity-50 hover:opacity-100 transition-opacity">
-            <span className="font-display font-bold text-xl tracking-wider text-white">
+            <span className="font-cinzel font-bold text-xl tracking-wider text-white">
               HACK<span className="text-primary">GOLD</span>
             </span>
           </div>
