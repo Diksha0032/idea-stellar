@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { ParticleBackground } from "@/components/ParticleBackground";
+import { FloatingIcons } from "@/components/FloatingIcons";
 import { Section } from "@/components/Section";
 import { TrackCard } from "@/components/TrackCard";
 import { useTracks } from "@/hooks/use-tracks";
@@ -105,6 +106,7 @@ export default function Landing() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/30">
       <Navbar />
       <ParticleBackground />
+      <FloatingIcons />
 
       {/* Hero Section */}
       <div className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
