@@ -109,7 +109,7 @@ export default function Landing() {
       <FloatingIcons />
 
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+      <div className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
         {/* Abstract Background Element */}
         <motion.div 
           style={{ y }}
@@ -201,14 +201,14 @@ export default function Landing() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
             <a href="/api/login">
-              <Button size="lg" className="h-14 px-10 rounded-full bg-primary text-black hover:bg-white hover:scale-105 transition-all duration-300 font-bold text-lg shadow-[0_0_20px_rgba(255,215,0,0.4)]">
+              <Button size="lg" className="h-14 px-10 rounded-full bg-primary text-black hover:bg-white hover:scale-105 transition-all duration-300 font-bold text-lg shadow-[0_0_15px_rgba(255,215,0,0.3)] hover:shadow-[0_0_25px_rgba(255,215,0,0.5)]">
                 Register Now
               </Button>
             </a>
-            <Button variant="outline" size="lg" className="h-14 px-10 rounded-full border-white/20 text-white hover:bg-white/5 hover:border-primary/50 transition-all text-lg">
+            <Button variant="outline" size="lg" className="h-14 px-10 rounded-full border-white/20 text-white hover:bg-white/5 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all text-lg">
               View Schedule
             </Button>
           </motion.div>
@@ -236,7 +236,7 @@ export default function Landing() {
           ].map((stat, i) => (
             <motion.div 
               key={i} 
-              className="text-center"
+              className="text-center p-4 rounded-xl hover-shadow cursor-default"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -296,7 +296,7 @@ export default function Landing() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 tilt-hover"
+                    className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover-shadow cursor-default"
                   >
                     <item.icon className="w-6 h-6 text-primary" />
                     <span className="text-white/80 text-sm font-medium">{item.label}</span>
@@ -444,7 +444,7 @@ export default function Landing() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.2 }}
-                  className="flex gap-6 tilt-hover p-4 rounded-xl hover:bg-white/5 transition-colors"
+                  className="flex gap-6 p-4 rounded-xl hover:bg-white/5 hover-shadow transition-all cursor-default"
                 >
                   <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-black border border-primary/30 flex items-center justify-center text-primary">
                     <feature.icon size={24} />

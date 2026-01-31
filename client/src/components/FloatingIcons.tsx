@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Lightbulb, Code, Hammer, Rocket, Brain, Trophy, Medal, Sparkles, Cpu, Zap, Target, Star } from "lucide-react";
+import { Lightbulb, Code, Hammer, Rocket, Brain, Trophy, Medal } from "lucide-react";
 
 const icons = [
   { Icon: Lightbulb, label: "idea" },
@@ -9,11 +9,6 @@ const icons = [
   { Icon: Brain, label: "think" },
   { Icon: Trophy, label: "prize" },
   { Icon: Medal, label: "win" },
-  { Icon: Sparkles, label: "create" },
-  { Icon: Cpu, label: "tech" },
-  { Icon: Zap, label: "fast" },
-  { Icon: Target, label: "goal" },
-  { Icon: Star, label: "star" },
 ];
 
 interface FloatingIcon {
@@ -40,13 +35,13 @@ function generateIcons(count: number): FloatingIcon[] {
       Icon: iconData.Icon,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 24 + 16,
+      size: Math.random() * 20 + 32,
       duration: Math.random() * 10 + 15,
       delay: Math.random() * 5,
       rotateX: Math.random() * 30 - 15,
       rotateY: Math.random() * 30 - 15,
       rotateZ: Math.random() * 360,
-      opacity: Math.random() * 0.15 + 0.05,
+      opacity: Math.random() * 0.12 + 0.06,
     });
   }
   
@@ -54,7 +49,7 @@ function generateIcons(count: number): FloatingIcon[] {
 }
 
 export function FloatingIcons() {
-  const floatingIcons = generateIcons(30);
+  const floatingIcons = generateIcons(21);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
@@ -97,108 +92,8 @@ export function FloatingIcons() {
           >
             <item.Icon 
               size={item.size} 
-              className="text-primary drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]"
+              className="text-primary drop-shadow-[0_0_8px_rgba(255,215,0,0.2)]"
               strokeWidth={1.5}
-            />
-            {/* 3D Shadow Effect */}
-            <div 
-              className="absolute inset-0 blur-sm"
-              style={{
-                transform: "translateZ(-10px) translateX(3px) translateY(3px)",
-                opacity: 0.3,
-              }}
-            >
-              <item.Icon 
-                size={item.size} 
-                className="text-primary/30"
-                strokeWidth={1.5}
-              />
-            </div>
-          </div>
-        </motion.div>
-      ))}
-      
-      {/* Additional wireframe shapes for 3D effect */}
-      {Array.from({ length: 8 }).map((_, i) => (
-        <motion.div
-          key={`shape-${i}`}
-          className="absolute border border-primary/10"
-          style={{
-            left: `${10 + (i * 12)}%`,
-            top: `${15 + (i * 10)}%`,
-            width: `${30 + i * 5}px`,
-            height: `${30 + i * 5}px`,
-            transformStyle: "preserve-3d",
-          }}
-          animate={{
-            rotateX: [0, 360],
-            rotateY: [0, 180],
-            rotateZ: i % 2 === 0 ? [0, 360] : [360, 0],
-          }}
-          transition={{
-            duration: 20 + i * 3,
-            delay: i * 0.5,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
-      
-      {/* 3D Cubes */}
-      {Array.from({ length: 5 }).map((_, i) => (
-        <motion.div
-          key={`cube-${i}`}
-          className="absolute"
-          style={{
-            left: `${20 + i * 18}%`,
-            top: `${30 + i * 12}%`,
-            transformStyle: "preserve-3d",
-            perspective: "800px",
-          }}
-          animate={{
-            rotateX: [0, 360],
-            rotateY: [0, 360],
-          }}
-          transition={{
-            duration: 25 + i * 5,
-            delay: i,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          <div 
-            className="relative w-8 h-8"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            {/* Front face */}
-            <div 
-              className="absolute inset-0 border border-primary/20 bg-primary/5"
-              style={{ transform: "translateZ(16px)" }}
-            />
-            {/* Back face */}
-            <div 
-              className="absolute inset-0 border border-primary/10 bg-primary/5"
-              style={{ transform: "translateZ(-16px)" }}
-            />
-            {/* Left face */}
-            <div 
-              className="absolute inset-0 border border-primary/15 bg-primary/5"
-              style={{ transform: "rotateY(-90deg) translateZ(16px)" }}
-            />
-            {/* Right face */}
-            <div 
-              className="absolute inset-0 border border-primary/15 bg-primary/5"
-              style={{ transform: "rotateY(90deg) translateZ(16px)" }}
-            />
-            {/* Top face */}
-            <div 
-              className="absolute inset-0 border border-primary/20 bg-primary/5"
-              style={{ transform: "rotateX(90deg) translateZ(16px)" }}
-            />
-            {/* Bottom face */}
-            <div 
-              className="absolute inset-0 border border-primary/10 bg-primary/5"
-              style={{ transform: "rotateX(-90deg) translateZ(16px)" }}
             />
           </div>
         </motion.div>
