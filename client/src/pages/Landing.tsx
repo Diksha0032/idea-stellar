@@ -109,48 +109,8 @@ export default function Landing() {
       <FloatingIcons />
 
       {/* Hero Section */}
-      <div className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
-        {/* Abstract Background Element */}
-        <motion.div 
-          style={{ y }}
-          className="absolute inset-0 z-0 flex items-center justify-center opacity-30 pointer-events-none"
-        >
-          <div className="w-[800px] h-[800px] rounded-full border border-primary/20 animate-[spin_60s_linear_infinite]" />
-          <div className="absolute w-[600px] h-[600px] border border-primary/10 rotate-45 animate-[spin_40s_linear_infinite_reverse]" />
-          <div className="absolute w-[400px] h-[400px] rounded-full border border-primary/30 animate-[pulse_4s_ease-in-out_infinite]" />
-        </motion.div>
-
-        {/* 3D Floating Shapes */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <motion.div 
-            animate={{ 
-              y: [0, -30, 0],
-              rotateZ: [0, 10, 0],
-              rotateX: [0, 15, 0]
-            }}
-            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/4 left-[10%] w-20 h-20 border-2 border-primary/30 rotate-45"
-            style={{ transformStyle: 'preserve-3d' }}
-          />
-          <motion.div 
-            animate={{ 
-              y: [0, 40, 0],
-              rotateZ: [45, 60, 45]
-            }}
-            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute top-1/3 right-[15%] w-16 h-16 border-2 border-primary/20 rounded-full"
-          />
-          <motion.div 
-            animate={{ 
-              y: [0, -25, 0],
-              rotateY: [0, 180, 360]
-            }}
-            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-1/3 left-[20%] w-12 h-12 bg-gradient-to-br from-primary/20 to-transparent"
-            style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
-          />
-        </div>
-
+      <div className="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden">
+        
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -214,16 +174,7 @@ export default function Landing() {
           </motion.div>
         </div>
         
-        {/* Scroll Indicator */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30"
-        >
-          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-primary to-transparent mx-auto mb-2" />
-          <span className="text-[10px] tracking-widest uppercase">Scroll</span>
-        </motion.div>
-      </div>
+        </div>
 
       {/* Stats Section */}
       <div className="border-y border-white/5 bg-black/50 backdrop-blur-sm">
@@ -341,68 +292,31 @@ export default function Landing() {
       </Section>
 
       {/* Steps / Timeline Section */}
-      <Section id="steps" className="bg-black/50">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">Your Journey</span>
-            <h2 className="text-4xl md:text-6xl font-cinzel font-bold text-white mt-4 mb-6">
-              THE <span className="text-gradient-gold">IDEATHON</span> STEPS
-            </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto" />
-          </motion.div>
+      <Section id="steps">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">The Ideathon Steps</h2>
+          <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
         </div>
 
-        <div className="relative">
-          {/* Connecting Line */}
-          <div className="absolute top-0 bottom-0 left-1/2 w-[2px] bg-gradient-to-b from-primary/50 via-primary/20 to-primary/50 hidden lg:block" />
-
-          <div className="space-y-8 lg:space-y-0">
-            {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2, duration: 0.6 }}
-                className={`relative lg:grid lg:grid-cols-2 lg:gap-8 items-center ${i % 2 === 0 ? '' : 'lg:flex-row-reverse'}`}
-              >
-                {/* Timeline Node */}
-                <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-black border-2 border-primary items-center justify-center z-10 animate-glow-pulse">
-                  <span className="font-orbitron font-bold text-primary text-lg">{step.number}</span>
-                </div>
-
-                {/* Card */}
-                <div className={`${i % 2 === 0 ? 'lg:pr-16 lg:text-right' : 'lg:col-start-2 lg:pl-16'}`}>
-                  <div className="step-card glass-panel rounded-2xl p-8 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-                    
-                    <div className={`flex items-start gap-6 ${i % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
-                      <div className="shrink-0 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-black border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                        <step.icon className="w-8 h-8 text-primary" />
-                      </div>
-                      
-                      <div className={`flex-1 ${i % 2 === 0 ? 'lg:text-right' : ''}`}>
-                        <div className="lg:hidden font-orbitron text-primary/60 text-sm mb-2">{step.number}</div>
-                        <h3 className="text-2xl font-cinzel font-bold text-white mb-3">{step.title}</h3>
-                        <p className="text-white/60 leading-relaxed mb-4">{step.description}</p>
-                        <div className="inline-flex items-center gap-2 text-primary text-sm font-medium">
-                          <Calendar className="w-4 h-4" />
-                          {step.duration}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Spacer for opposite side */}
-                <div className={`hidden lg:block ${i % 2 === 0 ? '' : 'lg:col-start-1 lg:row-start-1'}`} />
-              </motion.div>
-            ))}
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-black/40 border border-white/10 rounded-2xl p-6 text-center hover:border-primary/30 transition-colors"
+            >
+              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary">
+                <step.icon className="w-7 h-7" />
+              </div>
+              <div className="text-primary/60 text-sm font-medium mb-2">{step.number}</div>
+              <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-3">{step.description}</p>
+              <div className="text-primary text-xs font-medium">{step.duration}</div>
+            </motion.div>
+          ))}
         </div>
       </Section>
 
@@ -459,23 +373,14 @@ export default function Landing() {
           </div>
           <div className="relative perspective-container">
              {/* Decorative Image Placeholder - 3D Cube */}
-             <div className="card-3d">
-               <div className="card-3d-inner aspect-square rounded-3xl overflow-hidden relative border border-white/10 glass-panel">
-                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635322966219-b75ed372eb01?q=80&w=2864&auto=format&fit=crop')] bg-cover bg-center opacity-50 mix-blend-overlay" />
+             <div className="aspect-square rounded-3xl overflow-hidden relative border border-white/10 bg-black/40">
+                  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635322966219-b75ed372eb01?q=80&w=2864&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                   <div className="absolute bottom-8 left-8 right-8">
-                    <div className="text-5xl font-orbitron font-bold text-gradient-gold mb-2">48h</div>
+                    <div className="text-5xl font-display font-bold text-gradient-gold mb-2">48h</div>
                     <div className="text-primary text-sm tracking-widest uppercase">Of Non-Stop Innovation</div>
                   </div>
                </div>
-             </div>
-             
-             {/* Floating decorative elements */}
-             <motion.div 
-               animate={{ y: [0, -20, 0] }}
-               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-               className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full blur-[50px] opacity-20" 
-             />
           </div>
         </div>
       </Section>
@@ -489,16 +394,15 @@ export default function Landing() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-end max-w-5xl mx-auto perspective-container">
+        <div className="grid md:grid-cols-3 gap-8 items-end max-w-5xl mx-auto">
           {/* 2nd Place */}
           <motion.div 
-            whileHover={{ y: -10, rotateY: 5 }}
-            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group tilt-hover"
+            whileHover={{ y: -5 }}
+            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group"
           >
-            <div className="absolute top-0 left-0 right-0 h-[2px] shimmer-gold" />
             <div className="text-4xl font-bold text-white/20 mb-4 group-hover:text-primary/20 transition-colors">02</div>
             <div className="text-2xl font-bold text-white mb-2">Runner Up</div>
-            <div className="text-3xl font-orbitron font-bold text-primary mb-6">$25,000</div>
+            <div className="text-3xl font-display font-bold text-primary mb-6">$25,000</div>
             <ul className="text-sm text-white/60 space-y-2">
               <li>MacBook Pro M3</li>
               <li>YC Interview Fast-track</li>
@@ -508,17 +412,16 @@ export default function Landing() {
 
           {/* 1st Place */}
           <motion.div 
-            whileHover={{ y: -10, scale: 1.02 }}
-            className="bg-gradient-to-b from-[#FFD700]/10 to-black border border-[#FFD700]/30 rounded-2xl p-10 text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,215,0,0.1)] order-first md:order-none z-10 transform md:-translate-y-8"
+            whileHover={{ y: -5 }}
+            className="bg-gradient-to-b from-[#FFD700]/10 to-black border border-[#FFD700]/30 rounded-2xl p-10 text-center relative overflow-hidden order-first md:order-none z-10 transform md:-translate-y-8"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-            <div className="absolute inset-0 shimmer-gold opacity-30" />
             <div className="relative z-10">
-              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full flex items-center justify-center mb-6 shadow-lg shadow-primary/20 animate-glow-pulse">
+              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full flex items-center justify-center mb-6">
                 <Trophy className="text-black w-8 h-8" />
               </div>
               <div className="text-3xl font-bold text-white mb-2">Grand Prize</div>
-              <div className="text-5xl font-orbitron font-bold text-gradient-gold mb-8">$50,000</div>
+              <div className="text-5xl font-display font-bold text-gradient-gold mb-8">$50,000</div>
               <ul className="text-sm text-white/80 space-y-3 font-medium">
                 <li>$50k Cash Prize</li>
                 <li>Direct VC Introduction</li>
@@ -530,13 +433,12 @@ export default function Landing() {
 
           {/* 3rd Place */}
           <motion.div 
-            whileHover={{ y: -10, rotateY: -5 }}
-            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group tilt-hover"
+            whileHover={{ y: -5 }}
+            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group"
           >
-            <div className="absolute top-0 left-0 right-0 h-[2px] shimmer-gold" />
             <div className="text-4xl font-bold text-white/20 mb-4 group-hover:text-primary/20 transition-colors">03</div>
             <div className="text-2xl font-bold text-white mb-2">Third Place</div>
-            <div className="text-3xl font-orbitron font-bold text-primary mb-6">$10,000</div>
+            <div className="text-3xl font-display font-bold text-primary mb-6">$10,000</div>
             <ul className="text-sm text-white/60 space-y-2">
               <li>iPad Pro</li>
               <li>Cloud Credits</li>
@@ -550,7 +452,7 @@ export default function Landing() {
       <footer className="py-12 border-t border-white/5 bg-black text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center gap-2 mb-8 opacity-50 hover:opacity-100 transition-opacity">
-            <span className="font-cinzel font-bold text-xl tracking-wider text-white">
+            <span className="font-display font-bold text-xl tracking-wider text-white">
               HACK<span className="text-primary">GOLD</span>
             </span>
           </div>

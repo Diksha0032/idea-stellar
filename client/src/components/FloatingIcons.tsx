@@ -35,13 +35,13 @@ function generateIcons(count: number): FloatingIcon[] {
       Icon: iconData.Icon,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 20 + 32,
+      size: Math.random() * 28 + 44,
       duration: Math.random() * 10 + 15,
       delay: Math.random() * 5,
       rotateX: Math.random() * 30 - 15,
       rotateY: Math.random() * 30 - 15,
       rotateZ: Math.random() * 360,
-      opacity: Math.random() * 0.12 + 0.06,
+      opacity: Math.random() * 0.15 + 0.08,
     });
   }
   
