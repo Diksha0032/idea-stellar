@@ -6,32 +6,32 @@
 
 :root {
   /* Fonts */
-  --font-display: 'Playfair Display', serif;
+  --font-display: 'Orbitron', sans-serif;
   --font-body: 'Manrope', sans-serif;
 
-  /* Colors - HSL */
-  --background: 0 0% 4%; /* #0A0A0A - Deep Black */
-  --foreground: 45 10% 90%; /* Off-white for readability */
+  /* Colors - HSL - Interstellar Theme */
+  --background: 230 30% 4%; /* Deep space black with blue tint */
+  --foreground: 220 20% 90%; /* Cool white for readability */
   
-  /* Gold Palette */
-  --primary: 48 100% 50%; /* #FFD700 - Gold */
-  --primary-foreground: 0 0% 0%;
+  /* Interstellar Palette - Cyan/Teal accent */
+  --primary: 185 80% 55%; /* Cyan glow */
+  --primary-foreground: 230 30% 5%;
   
-  --secondary: 0 0% 10%; /* Dark Gray */
-  --secondary-foreground: 48 100% 50%;
+  --secondary: 250 30% 12%; /* Deep purple-black */
+  --secondary-foreground: 185 80% 55%;
   
-  --muted: 0 0% 15%;
-  --muted-foreground: 0 0% 60%;
+  --muted: 230 20% 15%;
+  --muted-foreground: 220 10% 55%;
   
-  --accent: 45 60% 45%; /* Darker Gold/Bronze */
+  --accent: 270 50% 50%; /* Cosmic purple */
   --accent-foreground: 0 0% 100%;
   
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 45 30% 20%;
-  --input: 45 30% 20%;
-  --ring: 48 100% 50%;
+  --border: 230 30% 20%;
+  --input: 230 30% 20%;
+  --ring: 185 80% 55%;
 
   --radius: 0.5rem;
 }
@@ -62,19 +62,32 @@
 
 @layer utilities {
   .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#FDB931] to-[#FFD700];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00D4FF] via-[#7B68EE] to-[#00D4FF];
+  }
+  
+  .text-gradient-interstellar {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00D4FF] via-[#A855F7] to-[#00D4FF];
   }
   
   .border-gradient-gold {
-    border-image: linear-gradient(to right, #FFD700, #FDB931, #9E7F0D) 1;
+    border-image: linear-gradient(to right, #00D4FF, #7B68EE, #00D4FF) 1;
   }
   
   .glass-panel {
-    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-xl;
+    @apply bg-[#0a0a1a]/60 backdrop-blur-xl border border-white/10 shadow-xl;
   }
 
-  .glass-gold {
-    @apply bg-[#FFD700]/10 backdrop-blur-md border border-[#FFD700]/30 shadow-[0_0_15px_rgba(255,215,0,0.1)];
+  .glass-interstellar {
+    @apply bg-[#00D4FF]/5 backdrop-blur-md border border-[#00D4FF]/20 shadow-[0_0_20px_rgba(0,212,255,0.1)];
+  }
+
+  .glow-button {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .glow-button:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(0, 212, 255, 0.2);
   }
 
   .font-cinzel {
@@ -110,15 +123,15 @@
     animation: float 6s ease-in-out infinite;
   }
 
-  /* 3D Text Shadow */
+  /* 3D Text Shadow - Interstellar */
   .text-3d {
     text-shadow: 
-      0 1px 0 hsl(48, 100%, 45%),
-      0 2px 0 hsl(48, 100%, 40%),
-      0 3px 0 hsl(48, 100%, 35%),
-      0 4px 0 hsl(48, 100%, 30%),
+      0 1px 0 hsl(185, 80%, 50%),
+      0 2px 0 hsl(185, 80%, 45%),
+      0 3px 0 hsl(185, 80%, 40%),
+      0 4px 0 hsl(185, 80%, 35%),
       0 5px 10px rgba(0,0,0,0.5),
-      0 10px 20px rgba(255,215,0,0.2);
+      0 10px 20px rgba(0,212,255,0.15);
   }
 
   /* Glow Pulse - removed for cleaner look */
@@ -132,7 +145,7 @@
   }
 
   .hover-shadow:hover {
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 10px rgba(255,215,0,0.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 15px rgba(0,212,255,0.15);
     transform: translateY(-3px);
   }
 
@@ -157,12 +170,12 @@
     100% { background-position: 200% 0; }
   }
 
-  .shimmer-gold {
+  .shimmer-interstellar {
     background: linear-gradient(
       90deg,
-      rgba(255,215,0,0) 0%,
-      rgba(255,215,0,0.3) 50%,
-      rgba(255,215,0,0) 100%
+      rgba(0,212,255,0) 0%,
+      rgba(0,212,255,0.2) 50%,
+      rgba(0,212,255,0) 100%
     );
     background-size: 200% 100%;
     animation: shimmer 3s infinite;
@@ -176,7 +189,7 @@
   }
 
   .timer-digit:hover {
-    border-color: rgba(255,215,0,0.3);
+    border-color: rgba(0,212,255,0.3);
     transform: translateY(-2px);
   }
 
@@ -186,7 +199,7 @@
   }
 
   .click-shadow:active {
-    box-shadow: 0 0 20px rgba(255,215,0,0.3), 0 0 40px rgba(255,215,0,0.15);
+    box-shadow: 0 0 20px rgba(0,212,255,0.3), 0 0 40px rgba(0,212,255,0.15);
     transform: scale(0.98);
   }
 
@@ -200,6 +213,6 @@
     transform: translateY(-10px) rotateX(5deg);
     box-shadow: 
       0 20px 40px rgba(0,0,0,0.4),
-      0 0 30px rgba(255,215,0,0.1);
+      0 0 30px rgba(0,212,255,0.1);
   }
 }

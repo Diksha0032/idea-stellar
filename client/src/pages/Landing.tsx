@@ -131,7 +131,7 @@ export default function Landing() {
             className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-none tracking-tight mb-8"
           >
             <span className="block text-white text-3d">BUILD THE</span>
-            <span className="block text-gradient-gold drop-shadow-[0_0_30px_rgba(255,215,0,0.2)]">
+            <span className="block text-gradient-interstellar drop-shadow-[0_0_30px_rgba(0,212,255,0.2)]">
               FUTURE
             </span>
           </motion.h1>
@@ -166,11 +166,11 @@ export default function Landing() {
             className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
             <a href="/api/login">
-              <Button size="lg" className="h-14 px-10 rounded-full bg-primary text-black hover:bg-white hover:scale-105 transition-all duration-300 font-bold text-lg shadow-[0_0_15px_rgba(255,215,0,0.3)] hover:shadow-[0_0_25px_rgba(255,215,0,0.5)]">
+              <Button size="lg" className="h-14 px-10 rounded-full bg-primary text-primary-foreground hover:bg-cyan-400 hover:scale-105 transition-all duration-300 font-bold text-lg glow-button">
                 Register Now
               </Button>
             </a>
-            <Button variant="outline" size="lg" className="h-14 px-10 rounded-full border-white/20 text-white hover:bg-white/5 hover:border-primary/50 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all text-lg">
+            <Button variant="outline" size="lg" className="h-14 px-10 rounded-full border-white/20 text-white hover:bg-white/5 hover:border-cyan-400/50 transition-all text-lg">
               View Schedule
             </Button>
           </motion.div>
@@ -214,8 +214,8 @@ export default function Landing() {
               viewport={{ once: true }}
             >
               <span className="text-primary text-sm font-bold tracking-[0.3em] uppercase">What Is</span>
-              <h2 className="text-4xl md:text-6xl font-cinzel font-bold text-white mt-4 mb-6">
-                HACK<span className="text-gradient-gold">GOLD</span> IDEATHON
+              <h2 className="text-4xl md:text-6xl font-display font-bold text-white mt-4 mb-6">
+                HACK<span className="text-gradient-interstellar">GOLD</span> IDEATHON
               </h2>
               <div className="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mb-8" />
             </motion.div>
@@ -346,7 +346,7 @@ export default function Landing() {
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
               <span className="font-body">An Experience</span> <br />
-              <span className="font-cinzel text-gradient-gold italic text-3d">Unlike Any Other</span>
+              <span className="font-display text-gradient-interstellar italic">Unlike Any Other</span>
             </h2>
             <div className="space-y-8">
               {[
@@ -379,7 +379,7 @@ export default function Landing() {
                   <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635322966219-b75ed372eb01?q=80&w=2864&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                   <div className="absolute bottom-8 left-8 right-8">
-                    <div className="text-5xl font-display font-bold text-gradient-gold mb-2">48h</div>
+                    <div className="text-5xl font-display font-bold text-gradient-interstellar mb-2">48h</div>
                     <div className="text-primary text-sm tracking-widest uppercase">Of Non-Stop Innovation</div>
                   </div>
                </div>
@@ -415,15 +415,15 @@ export default function Landing() {
           {/* 1st Place */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-gradient-to-b from-[#FFD700]/10 to-black border border-[#FFD700]/30 rounded-2xl p-10 text-center relative overflow-hidden order-first md:order-none z-10 transform md:-translate-y-8 click-shadow cursor-pointer"
+            className="bg-gradient-to-b from-cyan-500/10 to-black border border-cyan-400/30 rounded-2xl p-10 text-center relative overflow-hidden order-first md:order-none z-10 transform md:-translate-y-8 click-shadow cursor-pointer"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
             <div className="relative z-10">
-              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-primary to-[#9E7F0D] rounded-full flex items-center justify-center mb-6">
-                <Trophy className="text-black w-8 h-8" />
+              <div className="w-16 h-16 mx-auto bg-gradient-to-br from-cyan-400 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(0,212,255,0.3)]">
+                <Trophy className="text-white w-8 h-8" />
               </div>
               <div className="text-3xl font-bold text-white mb-2">Grand Prize</div>
-              <div className="text-5xl font-display font-bold text-gradient-gold mb-8">$50,000</div>
+              <div className="text-5xl font-display font-bold text-gradient-interstellar mb-8">$50,000</div>
               <ul className="text-sm text-white/80 space-y-3 font-medium">
                 <li>$50k Cash Prize</li>
                 <li>Direct VC Introduction</li>
@@ -455,7 +455,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center gap-2 mb-8 opacity-50 hover:opacity-100 transition-opacity">
             <span className="font-display font-bold text-3xl md:text-4xl tracking-tight text-white">
-              HACK<span className="text-gradient-gold">GOLD</span>
+              HACK<span className="text-gradient-interstellar">GOLD</span>
             </span>
           </div>
           <p className="text-white/40 text-sm">

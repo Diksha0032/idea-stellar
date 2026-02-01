@@ -1,14 +1,12 @@
 import { motion } from "framer-motion";
-import { Lightbulb, Code, Hammer, Rocket, Brain, Trophy, Medal } from "lucide-react";
+import { Lightbulb, Code, Rocket, Brain, Trophy } from "lucide-react";
 
 const icons = [
   { Icon: Lightbulb, label: "idea" },
   { Icon: Code, label: "code" },
-  { Icon: Hammer, label: "build" },
   { Icon: Rocket, label: "innovation" },
   { Icon: Brain, label: "think" },
   { Icon: Trophy, label: "prize" },
-  { Icon: Medal, label: "win" },
 ];
 
 interface FloatingIcon {
@@ -35,13 +33,13 @@ function generateIcons(count: number): FloatingIcon[] {
       Icon: iconData.Icon,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 28 + 44,
-      duration: Math.random() * 10 + 15,
+      size: Math.random() * 24 + 36,
+      duration: Math.random() * 12 + 18,
       delay: Math.random() * 5,
-      rotateX: Math.random() * 30 - 15,
-      rotateY: Math.random() * 30 - 15,
+      rotateX: Math.random() * 20 - 10,
+      rotateY: Math.random() * 20 - 10,
       rotateZ: Math.random() * 360,
-      opacity: Math.random() * 0.15 + 0.08,
+      opacity: Math.random() * 0.08 + 0.04,
     });
   }
   
@@ -49,7 +47,7 @@ function generateIcons(count: number): FloatingIcon[] {
 }
 
 export function FloatingIcons() {
-  const floatingIcons = generateIcons(21);
+  const floatingIcons = generateIcons(12);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
@@ -70,11 +68,11 @@ export function FloatingIcons() {
             rotateZ: item.rotateZ,
           }}
           animate={{
-            opacity: [item.opacity, item.opacity * 1.5, item.opacity],
-            y: [0, -30, 0],
-            rotateX: [item.rotateX, item.rotateX + 15, item.rotateX],
-            rotateY: [item.rotateY, item.rotateY + 20, item.rotateY],
-            rotateZ: [item.rotateZ, item.rotateZ + 10, item.rotateZ],
+            opacity: [item.opacity, item.opacity * 1.3, item.opacity],
+            y: [0, -20, 0],
+            rotateX: [item.rotateX, item.rotateX + 10, item.rotateX],
+            rotateY: [item.rotateY, item.rotateY + 15, item.rotateY],
+            rotateZ: [item.rotateZ, item.rotateZ + 5, item.rotateZ],
           }}
           transition={{
             duration: item.duration,
@@ -92,8 +90,8 @@ export function FloatingIcons() {
           >
             <item.Icon 
               size={item.size} 
-              className="text-primary drop-shadow-[0_0_8px_rgba(255,215,0,0.2)]"
-              strokeWidth={1.5}
+              className="text-cyan-400/40 drop-shadow-[0_0_12px_rgba(0,212,255,0.3)]"
+              strokeWidth={1}
             />
           </div>
         </motion.div>

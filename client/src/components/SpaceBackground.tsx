@@ -16,11 +16,10 @@ function generateCelestialObjects(): CelestialObject[] {
   const objects: CelestialObject[] = [];
   
   const planets = [
-    { color: 'from-amber-600 to-orange-800', size: 80 },
-    { color: 'from-blue-400 to-indigo-600', size: 60 },
-    { color: 'from-purple-500 to-pink-600', size: 50 },
-    { color: 'from-teal-400 to-cyan-600', size: 45 },
-    { color: 'from-red-500 to-rose-700', size: 55 },
+    { color: 'from-cyan-500 to-blue-700', size: 70 },
+    { color: 'from-purple-600 to-indigo-800', size: 55 },
+    { color: 'from-blue-400 to-cyan-600', size: 45 },
+    { color: 'from-violet-500 to-purple-700', size: 40 },
   ];
   
   planets.forEach((planet, i) => {
