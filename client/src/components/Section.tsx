@@ -11,7 +11,7 @@ interface SectionProps {
 
 export function Section({ children, className, id, delay = 0 }: SectionProps) {
   return (
-    <section id={id} className={cn("py-24 relative", className)}>
+    <section id={id} className={cn("py-16 relative", className)}>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

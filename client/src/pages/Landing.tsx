@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { ParticleBackground } from "@/components/ParticleBackground";
 import { FloatingIcons } from "@/components/FloatingIcons";
+import { SpaceBackground } from "@/components/SpaceBackground";
 import { Section } from "@/components/Section";
 import { TrackCard } from "@/components/TrackCard";
 import { useTracks } from "@/hooks/use-tracks";
@@ -54,11 +55,11 @@ function CountdownTimer() {
           transition={{ delay: 0.8 + i * 0.1, duration: 0.6 }}
           className="perspective-container"
         >
-          <div className="timer-digit rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] text-center animate-glow-pulse">
-            <div className="font-orbitron text-3xl md:text-5xl font-bold text-gradient-gold mb-1">
+          <div className="timer-digit rounded-2xl p-4 md:p-6 min-w-[80px] md:min-w-[100px] text-center">
+            <div className="font-orbitron text-3xl md:text-5xl font-bold text-white mb-1">
               {String(unit.value).padStart(2, '0')}
             </div>
-            <div className="text-white/50 text-xs uppercase tracking-widest">{unit.label}</div>
+            <div className="text-white/40 text-xs uppercase tracking-widest">{unit.label}</div>
           </div>
         </motion.div>
       ))}
@@ -106,6 +107,7 @@ export default function Landing() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/30">
       <Navbar />
       <ParticleBackground />
+      <SpaceBackground />
       <FloatingIcons />
 
       {/* Hero Section */}
@@ -306,7 +308,7 @@ export default function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-black/40 border border-white/10 rounded-2xl p-6 text-center hover:border-primary/30 transition-colors"
+              className="bg-black/40 border border-white/10 rounded-2xl p-6 text-center hover:border-primary/30 transition-colors click-shadow cursor-pointer"
             >
               <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary">
                 <step.icon className="w-7 h-7" />
@@ -398,7 +400,7 @@ export default function Landing() {
           {/* 2nd Place */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group"
+            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group click-shadow cursor-pointer"
           >
             <div className="text-4xl font-bold text-white/20 mb-4 group-hover:text-primary/20 transition-colors">02</div>
             <div className="text-2xl font-bold text-white mb-2">Runner Up</div>
@@ -413,7 +415,7 @@ export default function Landing() {
           {/* 1st Place */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-gradient-to-b from-[#FFD700]/10 to-black border border-[#FFD700]/30 rounded-2xl p-10 text-center relative overflow-hidden order-first md:order-none z-10 transform md:-translate-y-8"
+            className="bg-gradient-to-b from-[#FFD700]/10 to-black border border-[#FFD700]/30 rounded-2xl p-10 text-center relative overflow-hidden order-first md:order-none z-10 transform md:-translate-y-8 click-shadow cursor-pointer"
           >
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
             <div className="relative z-10">
@@ -434,7 +436,7 @@ export default function Landing() {
           {/* 3rd Place */}
           <motion.div 
             whileHover={{ y: -5 }}
-            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group"
+            className="bg-black/40 border border-white/10 rounded-2xl p-8 text-center relative overflow-hidden group click-shadow cursor-pointer"
           >
             <div className="text-4xl font-bold text-white/20 mb-4 group-hover:text-primary/20 transition-colors">03</div>
             <div className="text-2xl font-bold text-white mb-2">Third Place</div>
@@ -452,8 +454,8 @@ export default function Landing() {
       <footer className="py-12 border-t border-white/5 bg-black text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-center gap-2 mb-8 opacity-50 hover:opacity-100 transition-opacity">
-            <span className="font-display font-bold text-xl tracking-wider text-white">
-              HACK<span className="text-primary">GOLD</span>
+            <span className="font-display font-bold text-3xl md:text-4xl tracking-tight text-white">
+              HACK<span className="text-gradient-gold">GOLD</span>
             </span>
           </div>
           <p className="text-white/40 text-sm">
